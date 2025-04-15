@@ -1,45 +1,3 @@
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en"> -->
-<!---->
-<!-- <head> -->
-<!--    <meta charset="UTF-8"> -->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!--    <title>Dinamic AR Model Rotator</title> -->
-<!--    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> -->
-<!--    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
-<!-- </head> -->
-<!---->
-<!-- <body> -->
-<!--    <a-scene arjs> -->
-<!--       <a-marker type="pattern" url="./mar.patt" id="marker"> -->
-<!--          <a-entity id="model-entity" position="0 0 0" scale="1"></a-entity> -->
-<!--       </a-marker> -->
-<!--       <a-entity camera position="0 0 0"></a-entity> -->
-<!--    </a-scene> -->
-<!---->
-<!--    <script> -->
-<!--       const models = [ -->
-<!--          "./files/liz1.glb", -->
-<!--          "./files/liz3.glb" -->
-<!--       ]; -->
-<!---->
-<!--       let modelIndex = 0; -->
-<!--       const modelEntity = document.getElementById('model-entity'); -->
-<!---->
-<!--       function changeModel() { -->
-<!--          modelEntity.removeAttribute('gltf-model'); -->
-<!--          modelEntity.setAttribute('gltf-model', models[modelIndex]); -->
-<!--          modelIndex = (modelIndex + 1) % models.length; -->
-<!--       } -->
-<!---->
-<!--       changeModel(); -->
-<!--       setInterval(changeModel, 5000); -->
-<!--    </script> -->
-<!-- </body> -->
-<!---->
-<!-- </html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,15 +25,69 @@
          font-family: Arial, sans-serif;
       }
 
-      #marker-image {
-         width: 300px;
-         height: 300px;
-         margin: 20px;
-         border: 2px solid white;
-      }
-
       .hidden {
          display: none !important;
+      }
+
+      #marker-image {
+         width: 220px;
+         height: 220px;
+         margin: 35px;
+         opacity: 0.5;
+      }
+
+      .marker-container {
+         position: relative;
+         display: inline-block;
+         margin: 10px;
+      }
+
+      .marker-container::before,
+      .marker-container::after,
+      .corner-top-left,
+      .corner-top-right {
+         content: '';
+         position: absolute;
+         width: 23px;
+         height: 23px;
+         border-color: red;
+         border-style: solid;
+         z-index: 1;
+      }
+
+      .corner-top-left {
+         top: 20px;
+         left: 20px;
+         border-width: 3px 0 0 3px;
+      }
+
+      .corner-top-right {
+         top: 20px;
+         right: 20px;
+         border-width: 3px 3px 0 0;
+      }
+
+      .marker-container::before {
+         bottom: 20px;
+         left: 20px;
+         border-width: 0 0 3px 3px;
+      }
+
+      .marker-container::after {
+         bottom: 20px;
+         right: 20px;
+         border-width: 0 3px 3px 0;
+      }
+
+      .text {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin-top: 30px;
+      }
+
+      .text>p {
+         margin: 0;
       }
    </style>
 </head>
@@ -83,8 +95,15 @@
 <body>
    <div id="scanning-overlay">
       <h1>Apunta tu camara a este marcador:</h1>
-      <img id="marker-image" src="./mark.jpg" alt="AR Marker">
-      <p>Espera hasta que el modelo aparezca...</p>
+      <div class="marker-container">
+         <span class="corner-top-left"></span>
+         <span class="corner-top-right"></span>
+         <img id="marker-image" src="./mark.jpg" alt="AR Marker">
+      </div>
+      <div class="text">
+         <p>Apunta tu camara y espera hasta que el modelo aparezca</p>
+         <p>Luego prodras visualizar los modelos 3D!</p>
+      </div>
    </div>
 
    <a-scene arjs vr-mode-ui="enabled: false">
@@ -95,20 +114,22 @@
    </a-scene>
 
    <script>
-      const models = ["./files/liz1.glb", "./files/liz3.glb"];
+      const models = [
+         "./models/liz1.glb",
+         "./models/liz2.glb",
+         "./models/liz3.glb"
+      ];
       let modelIndex = 0;
+
       const modelEntity = document.getElementById('model-entity');
       const overlay = document.getElementById('scanning-overlay');
 
-      // Show instructions initially
       overlay.classList.remove('hidden');
 
-      // Hide instructions when marker is found
       document.querySelector('a-marker').addEventListener('markerFound', () => {
          overlay.classList.add('hidden');
       });
 
-      // Show instructions again if marker is lost
       document.querySelector('a-marker').addEventListener('markerLost', () => {
          overlay.classList.remove('hidden');
       });
