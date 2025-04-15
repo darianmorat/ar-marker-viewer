@@ -9,6 +9,11 @@
    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
    <style>
+      body {
+         text-align: center;
+         padding: 20px;
+      }
+
       #scanning-overlay {
          position: fixed;
          top: 0;
@@ -40,6 +45,7 @@
          position: relative;
          display: inline-block;
          margin: 10px;
+         margin-bottom: 30px;
       }
 
       .marker-container::before,
@@ -79,13 +85,6 @@
          border-width: 0 3px 3px 0;
       }
 
-      .text {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         margin-top: 30px;
-      }
-
       .text>p {
          margin: 0;
       }
@@ -101,8 +100,7 @@
          <img id="marker-image" src="./mark.jpg" alt="AR Marker">
       </div>
       <div class="text">
-         <p>Apunta tu camara y espera hasta que el modelo aparezca</p>
-         <p>Luego prodras visualizar los modelos 3D!</p>
+         <p>Apunta tu camara y espera hasta que el modelo aparezca...</p>
       </div>
    </div>
 
