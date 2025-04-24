@@ -97,7 +97,7 @@
       <div class="marker-container">
          <span class="corner-top-left"></span>
          <span class="corner-top-right"></span>
-         <img id="marker-image" src="./mark.png" alt="AR Marker">
+         <img id="marker-image" src="./pattern-IMG.png" alt="AR Marker">
       </div>
       <div class="text">
          <p>Apunta tu camara y espera hasta que el modelo aparezca...</p>
@@ -105,7 +105,7 @@
    </div>
 
    <a-scene arjs vr-mode-ui="enabled: false">
-      <a-marker type="pattern" url="./mark.patt" id="marker" markerhandler>
+      <a-marker type="pattern" url="./pattern-IMG.patt" id="marker" markerhandler>
          <a-entity id="model-entity" position="0 0 0" scale="1"></a-entity>
       </a-marker>
       <a-entity camera></a-entity>
@@ -116,9 +116,9 @@
          "./models/liz1.glb",
          "./models/liz2.glb",
          "./models/liz3.glb",
-         // "./models/liz4.glb",
-         // "./models/liz5.glb",
-         // "./models/liz6.glb",
+         "./models/liz4.glb",
+         "./models/liz5.glb",
+         "./models/liz6.glb",
       ];
       let modelIndex = 0;
 
