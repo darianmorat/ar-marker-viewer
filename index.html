@@ -1,168 +1,23 @@
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en"> -->
-<!---->
-<!-- <head> -->
-<!--    <meta charset="UTF-8"> -->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!--    <title>AR Model Viewer</title> -->
-<!--    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> -->
-<!--    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
-<!--    <style> -->
-<!--       body { -->
-<!--          text-align: center; -->
-<!--          padding: 20px; -->
-<!--       } -->
-<!---->
-<!--       #scanning-overlay { -->
-<!--          position: fixed; -->
-<!--          top: 0; -->
-<!--          left: 0; -->
-<!--          width: 100%; -->
-<!--          height: 100%; -->
-<!--          background: rgba(0, 0, 0, 0.7); -->
-<!--          color: white; -->
-<!--          display: flex; -->
-<!--          flex-direction: column; -->
-<!--          justify-content: center; -->
-<!--          align-items: center; -->
-<!--          z-index: 9999; -->
-<!--          font-family: Arial, sans-serif; -->
-<!--       } -->
-<!---->
-<!--       .hidden { -->
-<!--          display: none !important; -->
-<!--       } -->
-<!---->
-<!--       #marker-image { -->
-<!--          width: 220px; -->
-<!--          height: 220px; -->
-<!--          margin: 35px; -->
-<!--          opacity: 0.5; -->
-<!--       } -->
-<!---->
-<!--       .marker-container { -->
-<!--          position: relative; -->
-<!--          display: inline-block; -->
-<!--          margin: 10px; -->
-<!--          margin-bottom: 30px; -->
-<!--       } -->
-<!---->
-<!--       .marker-container::before, -->
-<!--       .marker-container::after, -->
-<!--       .corner-top-left, -->
-<!--       .corner-top-right { -->
-<!--          content: ''; -->
-<!--          position: absolute; -->
-<!--          width: 23px; -->
-<!--          height: 23px; -->
-<!--          border-color: red; -->
-<!--          border-style: solid; -->
-<!--          z-index: 1; -->
-<!--       } -->
-<!---->
-<!--       .corner-top-left { -->
-<!--          top: 20px; -->
-<!--          left: 20px; -->
-<!--          border-width: 3px 0 0 3px; -->
-<!--       } -->
-<!---->
-<!--       .corner-top-right { -->
-<!--          top: 20px; -->
-<!--          right: 20px; -->
-<!--          border-width: 3px 3px 0 0; -->
-<!--       } -->
-<!---->
-<!--       .marker-container::before { -->
-<!--          bottom: 20px; -->
-<!--          left: 20px; -->
-<!--          border-width: 0 0 3px 3px; -->
-<!--       } -->
-<!---->
-<!--       .marker-container::after { -->
-<!--          bottom: 20px; -->
-<!--          right: 20px; -->
-<!--          border-width: 0 3px 3px 0; -->
-<!--       } -->
-<!---->
-<!--       .text>p { -->
-<!--          margin: 0; -->
-<!--       } -->
-<!--    </style> -->
-<!-- </head> -->
-<!---->
-<!-- <body> -->
-<!--    <div id="scanning-overlay"> -->
-<!--       <h1>Apunta tu camara a este marcador:</h1> -->
-<!--       <div class="marker-container"> -->
-<!--          <span class="corner-top-left"></span> -->
-<!--          <span class="corner-top-right"></span> -->
-<!--          <img id="marker-image" src="./mark.png" alt="AR Marker"> -->
-<!--       </div> -->
-<!--       <div class="text"> -->
-<!--          <p>Apunta tu camara y espera hasta que el modelo aparezca...</p> -->
-<!--       </div> -->
-<!--    </div> -->
-<!---->
-<!--    <a-scene arjs vr-mode-ui="enabled: false"> -->
-<!--       <a-marker type="pattern" url="./mark.patt" id="marker" markerhandler> -->
-<!--          <a-entity id="model-entity" position="0 0 0" scale="1"></a-entity> -->
-<!--       </a-marker> -->
-<!--       <a-entity camera></a-entity> -->
-<!--    </a-scene> -->
-<!---->
-<!--    <script> -->
-<!--       const models = [ -->
-<!--          "./models/liz1.glb", -->
-<!--          "./models/liz2.glb", -->
-<!--          "./models/liz3.glb", -->
-<!--          "./models/liz4.glb", -->
-<!--          "./models/liz5.glb", -->
-<!--          "./models/liz6.glb", -->
-<!--       ]; -->
-<!--       let modelIndex = 0; -->
-<!---->
-<!--       const modelEntity = document.getElementById('model-entity'); -->
-<!--       const overlay = document.getElementById('scanning-overlay'); -->
-<!---->
-<!--       overlay.classList.remove('hidden'); -->
-<!---->
-<!--       document.querySelector('a-marker').addEventListener('markerFound', () => { -->
-<!--          overlay.classList.add('hidden'); -->
-<!--       }); -->
-<!---->
-<!--       document.querySelector('a-marker').addEventListener('markerLost', () => { -->
-<!--          overlay.classList.remove('hidden'); -->
-<!--       }); -->
-<!---->
-<!--       function changeModel() { -->
-<!--          modelEntity.removeAttribute('gltf-model'); -->
-<!--          modelEntity.setAttribute('gltf-model', models[modelIndex]); -->
-<!--          modelIndex = (modelIndex + 1) % models.length; -->
-<!--       } -->
-<!---->
-<!--       changeModel(); -->
-<!--       setInterval(changeModel, 5000); -->
-<!--    </script> -->
-<!-- </body> -->
-<!---->
-<!-- </html> -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="mobile-web-app-capable" content="yes">
    <title>AR Model Viewer</title>
    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
    <style>
       body {
-         margin: 0;
-         padding: 0;
-         overflow: hidden;
          text-align: center;
+         padding: 20px;
+         margin: 0;
+         overflow: hidden;
       }
+
       #scanning-overlay {
          position: fixed;
          top: 0;
@@ -178,21 +33,25 @@
          z-index: 9999;
          font-family: Arial, sans-serif;
       }
+
       .hidden {
          display: none !important;
       }
+
       #marker-image {
          width: 220px;
          height: 220px;
          margin: 35px;
          opacity: 0.5;
       }
+
       .marker-container {
          position: relative;
          display: inline-block;
          margin: 10px;
          margin-bottom: 30px;
       }
+
       .marker-container::before,
       .marker-container::after,
       .corner-top-left,
@@ -205,31 +64,70 @@
          border-style: solid;
          z-index: 1;
       }
+
       .corner-top-left {
          top: 20px;
          left: 20px;
          border-width: 3px 0 0 3px;
       }
+
       .corner-top-right {
          top: 20px;
          right: 20px;
          border-width: 3px 3px 0 0;
       }
+
       .marker-container::before {
          bottom: 20px;
          left: 20px;
          border-width: 0 0 3px 3px;
       }
+
       .marker-container::after {
          bottom: 20px;
          right: 20px;
          border-width: 0 3px 3px 0;
       }
+
       .text>p {
          margin: 0;
       }
+
+      #controls {
+         position: fixed;
+         bottom: 20px;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         gap: 20px;
+         z-index: 9998;
+      }
+
+      #controls button {
+         background-color: rgba(0, 0, 0, 0.7);
+         color: white;
+         border: 2px solid white;
+         border-radius: 8px;
+         padding: 10px 20px;
+         font-size: 16px;
+         cursor: pointer;
+      }
+
+      #loading-indicator {
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: rgba(0, 0, 0, 0.5);
+         color: white;
+         padding: 15px;
+         border-radius: 8px;
+         z-index: 9997;
+      }
    </style>
 </head>
+
 <body>
    <div id="scanning-overlay">
       <h1>Apunta tu camara a este marcador:</h1>
@@ -242,68 +140,142 @@
          <p>Apunta tu camara y espera hasta que el modelo aparezca...</p>
       </div>
    </div>
-   
-   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
-      <a-assets>
-         <a-asset-item id="model-1" src="./models/liz1.glb"></a-asset-item>
-         <a-asset-item id="model-2" src="./models/liz2.glb"></a-asset-item>
-         <a-asset-item id="model-3" src="./models/liz3.glb"></a-asset-item>
-         <a-asset-item id="model-4" src="./models/liz4.glb"></a-asset-item>
-         <a-asset-item id="model-5" src="./models/liz5.glb"></a-asset-item>
-         <a-asset-item id="model-6" src="./models/liz6.glb"></a-asset-item>
+
+   <div id="controls" class="hidden">
+      <button id="prev-model">Previous</button>
+      <button id="next-model">Next</button>
+   </div>
+
+   <div id="loading-indicator" class="hidden">
+      <p>Loading model...</p>
+   </div>
+
+   <a-scene arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;" vr-mode-ui="enabled: false">
+      <a-assets id="assets">
+         <!-- Assets will be loaded here dynamically -->
       </a-assets>
       
-      <a-marker type="pattern" url="./mark.patt" id="ar-marker">
-         <a-entity id="model-entity" position="0 0 0" rotation="0 0 0" scale="1 1 1"></a-entity>
+      <a-marker type="pattern" url="./mark.patt" id="marker" markerhandler>
+         <a-entity id="model-entity" position="0 0 0" scale="1"></a-entity>
       </a-marker>
-      
       <a-entity camera></a-entity>
    </a-scene>
-   
+
    <script>
-      // Wait for the scene to load
-      document.addEventListener("DOMContentLoaded", function() {
-         const models = [
-            "./models/liz1.glb",
-            "./models/liz2.glb",
-            "./models/liz3.glb",
-            "./models/liz4.glb",
-            "./models/liz5.glb",
-            "./models/liz6.glb"
-         ];
-         
-         let modelIndex = 0;
-         const modelEntity = document.getElementById('model-entity');
-         const overlay = document.getElementById('scanning-overlay');
-         const marker = document.getElementById('ar-marker');
-         
-         // Show overlay by default
+      const models = [
+         "./models/liz1.glb",
+         "./models/liz2.glb",
+         "./models/liz3.glb",
+         "./models/liz4.glb",
+         "./models/liz5.glb",
+         "./models/liz6.glb",
+      ];
+      let modelIndex = 0;
+      let autoRotate = true;
+
+      const modelEntity = document.getElementById('model-entity');
+      const overlay = document.getElementById('scanning-overlay');
+      const controls = document.getElementById('controls');
+      const loadingIndicator = document.getElementById('loading-indicator');
+      const assets = document.getElementById('assets');
+
+      // Show overlay initially
+      overlay.classList.remove('hidden');
+
+      // Marker events
+      document.querySelector('a-marker').addEventListener('markerFound', () => {
+         overlay.classList.add('hidden');
+         controls.classList.remove('hidden');
+      });
+
+      document.querySelector('a-marker').addEventListener('markerLost', () => {
          overlay.classList.remove('hidden');
+         controls.classList.add('hidden');
+      });
+
+      // Navigation buttons
+      document.getElementById('prev-model').addEventListener('click', () => {
+         modelIndex = (modelIndex - 1 + models.length) % models.length;
+         changeModel();
+      });
+
+      document.getElementById('next-model').addEventListener('click', () => {
+         modelIndex = (modelIndex + 1) % models.length;
+         changeModel();
+      });
+
+      // Model loading function
+      function changeModel() {
+         // Show loading indicator
+         loadingIndicator.classList.remove('hidden');
          
-         // Handle marker detection events
-         marker.addEventListener('markerFound', () => {
-            console.log("Marker found!");
-            overlay.classList.add('hidden');
-         });
+         // Remove current model
+         modelEntity.removeAttribute('gltf-model');
          
-         marker.addEventListener('markerLost', () => {
-            console.log("Marker lost!");
-            overlay.classList.remove('hidden');
-         });
-         
-         // Function to change the displayed model
-         function changeModel() {
-            console.log("Changing model to:", models[modelIndex]);
+         // Set timeout to ensure there's a visual indication of change
+         setTimeout(() => {
+            // Load new model
             modelEntity.setAttribute('gltf-model', models[modelIndex]);
+         }, 100);
+      }
+
+      // Handle model loaded event
+      modelEntity.addEventListener('model-loaded', function() {
+         loadingIndicator.classList.add('hidden');
+      });
+
+      // Handle model error
+      modelEntity.addEventListener('model-error', function(e) {
+         console.error("Model failed to load:", e.detail.src);
+         loadingIndicator.classList.add('hidden');
+         
+         // Skip to next model
+         modelIndex = (modelIndex + 1) % models.length;
+         changeModel();
+      });
+
+      // Auto-rotation of models
+      let rotationInterval = setInterval(function() {
+         if (autoRotate) {
             modelIndex = (modelIndex + 1) % models.length;
+            changeModel();
          }
-         
-         // Load the initial model
-         setTimeout(changeModel, 1000);
-         
-         // Change models every 5 seconds
-         setInterval(changeModel, 5000);
+      }, 5000);
+
+      // Preload models
+      models.forEach(url => {
+         const preloader = document.createElement('a-asset-item');
+         preloader.setAttribute('src', url);
+         preloader.setAttribute('id', url.replace(/\W/g, '_'));
+         assets.appendChild(preloader);
+      });
+
+      // Handle device orientation changes
+      window.addEventListener('orientationchange', function() {
+         // Give the browser time to adjust
+         setTimeout(() => {
+            // Refresh the AR scene
+            const scene = document.querySelector('a-scene');
+            if (scene) {
+               scene.resize();
+            }
+         }, 200);
+      });
+
+      // Initialize first model
+      changeModel();
+
+      // Canvas performance optimization
+      window.addEventListener('load', () => {
+         // Wait a moment for AR.js to create its canvas
+         setTimeout(() => {
+            // Find all canvas elements and set willReadFrequently to true
+            document.querySelectorAll('canvas').forEach(canvas => {
+               const ctx = canvas.getContext('2d', {willReadFrequently: true});
+            });
+         }, 1000);
       });
    </script>
 </body>
+
 </html>
